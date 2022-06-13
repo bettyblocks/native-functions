@@ -1,6 +1,6 @@
 # Native functions
 
-This project contains the action functions that implement the action steps offered by the Betty Blocks platform.
+This project contains the action functions that implement the action steps offered by the Betty Blocks platform..
 
 ## Usage
 
