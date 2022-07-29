@@ -1,4 +1,4 @@
-import loop from '../../functions/loop/1.0';
+import loop from '../../../functions/loop/1.0';
 
 describe('Native loop', () => {
   test('It loops over a collection and execustes child steps', async () => {

@@ -1,5 +1,5 @@
-import deleteRecord from '../../functions/delete-record/1.0';
-import { fetchRecord } from '../../functions/utils';
+import deleteRecord from '../../../functions/delete-record/1.0';
+import { fetchRecord } from '../../../functions/utils';
 
 describe('Native delete', () => {
   test('It deletes a record', async () => {

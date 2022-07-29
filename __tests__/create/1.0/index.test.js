@@ -1,4 +1,4 @@
-import create from '../../functions/create/1.0';
+import create from '../../../functions/create/1.0';
 
 const mapping = [
   {

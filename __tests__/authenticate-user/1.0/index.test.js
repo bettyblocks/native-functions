@@ -1,4 +1,4 @@
-import authenticateUser from '../../functions/authenticate-user/1.0';
+import authenticateUser from '../../../functions/authenticate-user/1.0';
 
 describe('Native authenticate user using username/password', () => {
   test('It authenticates a user', async () => {

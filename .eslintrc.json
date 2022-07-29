@@ -13,7 +13,12 @@
   },
   "rules": {
     "no-restricted-globals": 0,
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "prettier/prettier": [
       "error",
       {
@@ -24,6 +29,7 @@
   },
   "globals": {
     "gql": "readonly",
-    "fetch": "readonly"
+    "fetch": "readonly",
+    "storeFile": "readonly"
   }
 }

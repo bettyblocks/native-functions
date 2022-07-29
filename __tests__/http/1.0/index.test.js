@@ -1,4 +1,4 @@
-import http from '../../functions/http/1.0';
+import http from '../../../functions/http/1.0';
 
 describe('Native http', () => {
   test('Makes a succesfull http call.', async () => {

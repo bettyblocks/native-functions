@@ -1,4 +1,4 @@
-import log from '../../functions/log/2.0';
+import log from '../../../functions/log/2.0';
 
 describe('Native condition', () => {
   const variables = [

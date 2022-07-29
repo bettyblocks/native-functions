@@ -1,4 +1,4 @@
-import update from '../../functions/update/1.0';
+import update from '../../../functions/update/1.0';
 
 const mapping = [
   {
