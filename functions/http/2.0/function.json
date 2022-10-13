@@ -73,7 +73,7 @@
       "name": "queryParameters"
     },
     {
-      "info": "Select all the variables you want to have available in the template with a key",
+      "info": "Select all the variables you want to have available in the template with a key. Use them in the body with {{ key }}",
       "label": "Body Variables",
       "meta": {
         "type": "Map"
