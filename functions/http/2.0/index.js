@@ -14,7 +14,7 @@ const parseQueryParameters = (queryParameters) =>
 const generateUrl = (url, protocol, queryParameters) =>
   `${protocol}://${url}${parseQueryParameters(queryParameters)}`;
 
-const https2 = async ({
+const http = async ({
   url,
   method,
   body,
@@ -23,7 +23,6 @@ const https2 = async ({
   variables,
   queryParameters = [],
 }) => {
-  //   throw JSON.stringify(variables);
   const variableMap = variables.reduce((previousValue, currentValue) => {
     previousValue[currentValue.key] = currentValue.value;
     return previousValue;
@@ -43,4 +42,4 @@ const https2 = async ({
   return { as: data };
 };
 
-export default https2;
+export default http;
