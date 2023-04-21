@@ -1,4 +1,4 @@
-import { RelationKind } from './contants';
+import { RelationKind, PropertyKind } from './contants';
 
 export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -56,6 +56,10 @@ const getQueryKeys = (properties) =>
       } = property;
 
       switch (kind) {
+        case PropertyKind.OBJECT:
+          return `${name} {
+                uuid
+              }`;
         case RelationKind.BELONGS_TO:
           return parseBelongsTo(name, value);
         case RelationKind.HAS_MANY:

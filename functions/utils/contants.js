@@ -4,3 +4,7 @@ export const RelationKind = {
   BELONGS_TO: 'BELONGS_TO',
   HAS_MANY: 'HAS_MANY',
 };
+
+export const PropertyKind = {
+  OBJECT: 'OBJECT',
+};
