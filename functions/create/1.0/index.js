@@ -1,6 +1,11 @@
 import { parseAssignedProperties, fetchRecord } from '../../utils';
 
 const create = async ({ model: { name: modelName }, mapping }) => {
+  const fragment = await parseToGqlFragment({
+    propertyMap: mapping,
+    modelName,
+  });
+
   const assignProperties = parseAssignedProperties(mapping);
 
   const input = {
@@ -25,7 +30,7 @@ const create = async ({ model: { name: modelName }, mapping }) => {
   const {
     [mutationName]: { id },
   } = data;
-  const createdRecord = await fetchRecord(modelName, id, mapping);
+  const createdRecord = await fetchRecord(modelName, id, fragment);
 
   return {
     as: createdRecord,
