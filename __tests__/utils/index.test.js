@@ -1,6 +1,9 @@
 import { fetchRecord, parseAssignedProperties } from '../../functions/utils';
 
-const properties = [
+const userFragment =
+  'fragment userFields on User {\n    firstName\nlastName\nage\n  }';
+
+const userProperties = [
   {
     key: [
       {
@@ -30,39 +33,12 @@ const properties = [
   },
 ];
 
-const taskProperties = [
-  {
-    key: [
-      {
-        name: 'id',
-        kind: 'INTEGER',
-      },
-    ],
-    value: 1,
-  },
-  {
-    key: [
-      {
-        name: 'name',
-        kind: 'STRING',
-      },
-    ],
-    value: 'First task',
-  },
-  {
-    key: [
-      {
-        name: 'user',
-        kind: 'BELONGS_TO',
-      },
-    ],
-    value: { firstName: 'John', id: 1, lastName: 'Doe', age: 30 },
-  },
-];
+const taskFragment =
+  'fragment taskFields on Task {\n    id\nname\nuser {\n      firstName\nid\nlastName\nage\n    }\n  }';
 
 describe('Utility functions', () => {
   test('parseAssignedProperties', () => {
-    expect(parseAssignedProperties(properties)).toStrictEqual({
+    expect(parseAssignedProperties(userProperties)).toStrictEqual({
       firstName: 'John',
       lastName: 'Doe',
       age: 30,
@@ -70,7 +46,7 @@ describe('Utility functions', () => {
   });
 
   test('fetchRecord returns an existing record', async () => {
-    const result = await fetchRecord('User', 1, properties);
+    const result = await fetchRecord('User', 1, userFragment);
 
     expect(result).toMatchObject({
       id: 1,
@@ -81,7 +57,7 @@ describe('Utility functions', () => {
   });
 
   test('fetchRecord returns an error when no record is found', async () => {
-    const result = await fetchRecord('User', -1, properties);
+    const result = await fetchRecord('User', -1, userFragment);
 
     expect(result).toBeNull();
   });
@@ -97,7 +73,7 @@ describe('Utility functions', () => {
   });
 
   test('fetchRecord returns an record with a belongs to relation', async () => {
-    const result = await fetchRecord('Task', 1, taskProperties);
+    const result = await fetchRecord('Task', 1, taskFragment);
     expect(result).toMatchObject({
       id: 1,
       name: 'First task',
