@@ -82,13 +82,16 @@ const getQueryFields = (propertyMap) =>
 
 const parseToGqlFragment = async ({ propertyMap, modelName }) => {
   if (propertyMap.length > 0 && modelName)
-    return `fragment ${modelName.toLowerCase()}Fields on ${capitalizeFirstLetter(
-      modelName,
-    )} {
+    return {
+      name: `${modelName.toLowerCase()}Fields`,
+      fragmentGql: `fragment ${modelName.toLowerCase()}Fields on ${capitalizeFirstLetter(
+        modelName,
+      )} {
       ${getQueryFields(propertyMap)}
-    }`;
+    }`,
+    };
 
-  return '';
+  return { name: '', fragmentGql: '' };
 };
 
 export default parseToGqlFragment;

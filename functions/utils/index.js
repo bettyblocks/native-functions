@@ -46,15 +46,16 @@ export const parseAssignedProperties = (properties) =>
     };
   }, {});
 
-export const fetchRecord = async (modelName, id, fragment) => {
+export const fetchRecord = async (modelName, id, fragment = {}) => {
   const queryName = `one${modelName}`;
+  const { name, fragmentGql } = fragment;
 
   const query = `
-  ${fragment || ''}
+  ${fragmentGql}
   query($where: ${modelName}FilterInput) {
     ${queryName}(where: $where) {
       id
-      ${fragment ? `...${modelName.toLowerCase()}Fields` : ''}
+      ${fragmentGql ? `...${name}` : ''}
     }
   }
 `;
