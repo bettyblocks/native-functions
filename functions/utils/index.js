@@ -48,7 +48,7 @@ export const parseAssignedProperties = (properties) =>
 
 export const fetchRecord = async (modelName, id, fragment = {}) => {
   const queryName = `one${modelName}`;
-  const { name, fragmentGql } = fragment;
+  const { name, gql: fragmentGql } = fragment;
 
   const query = `
   ${fragmentGql || ''}
