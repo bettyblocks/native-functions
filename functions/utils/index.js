@@ -55,7 +55,7 @@ export const fetchRecord = async (modelName, id, fragment = {}) => {
   query($where: ${modelName}FilterInput) {
     ${queryName}(where: $where) {
       id
-      ${fragmentGql ? `...${name}` : ''}
+      ${name || ''}
     }
   }
 `;
