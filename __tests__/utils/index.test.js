@@ -2,7 +2,7 @@ import { fetchRecord, parseAssignedProperties } from '../../functions/utils';
 
 const userFragment = {
   name: 'userFields',
-  gql: 'fragment userFields on User {\n    firstName\nlastName\nage\n  }',
+  gql: 'fragment userFields on User {\n        \nid    firstName\nlastName\nage\n  }',
 };
 
 const userProperties = [
