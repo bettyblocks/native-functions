@@ -1,12 +1,6 @@
 {
-  "extends": [
-    "airbnb/base",
-    "prettier"
-  ],
-  "plugins": [
-    "prettier",
-    "jest"
-  ],
+  "extends": ["airbnb/base", "prettier"],
+  "plugins": ["prettier", "jest"],
   "env": {
     "node": true,
     "jest": true
@@ -31,6 +25,7 @@
     "gql": "readonly",
     "fetch": "readonly",
     "smtp": "readonly",
-    "storeFile": "readonly"
+    "storeFile": "readonly",
+    "parseToGqlFragment": "readonly"
   }
 }

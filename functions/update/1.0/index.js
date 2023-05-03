@@ -7,6 +7,11 @@ const update = async ({
   },
   mapping,
 }) => {
+  const fragment = await parseToGqlFragment({
+    propertyMap: mapping,
+    modelName,
+  });
+
   const assignProperties = parseAssignedProperties(mapping);
 
   const input = {
@@ -29,7 +34,7 @@ const update = async ({
     throw errors;
   }
 
-  const updatedRecord = await fetchRecord(modelName, id, mapping);
+  const updatedRecord = await fetchRecord(modelName, id, fragment);
 
   return {
     as: updatedRecord,
