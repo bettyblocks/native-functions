@@ -1,4 +1,8 @@
-import { fetchRecord, parseAssignedProperties } from '../../functions/utils';
+import {
+  fetchRecord,
+  listWrap,
+  parseAssignedProperties,
+} from '../../functions/utils';
 
 const userFragment = {
   name: 'userFields',
@@ -88,5 +92,15 @@ describe('Utility functions', () => {
         age: 30,
       },
     });
+  });
+
+  test('listWrap', () => {
+    expect(listWrap([])).toStrictEqual([]);
+    expect(listWrap([1])).toStrictEqual([1]);
+    expect(listWrap(1)).toStrictEqual([1]);
+    expect(listWrap(null)).toStrictEqual([]);
+    expect(listWrap()).toStrictEqual([]);
+    expect(listWrap({})).toStrictEqual([{}]);
+    expect(listWrap('test')).toStrictEqual(['test']);
   });
 });

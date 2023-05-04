@@ -235,6 +235,61 @@ describe('Native update', () => {
     });
   });
 
+  test('It updates a record with supplied validationSet', async () => {
+    const { as: result } = await update({
+      selectedRecord: {
+        data: { id: 1 },
+        model: { name: 'User' },
+      },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'firstName',
+              kind: 'STRING',
+            },
+          ],
+          value: 'Pete',
+        },
+      ],
+      validationSets: 'empty',
+    });
+    expect(result).toMatchObject({
+      firstName: 'Pete',
+      lastName: 'John',
+      age: 40,
+    });
+  });
+
+  test('It fails an update record with supplied validationSet', async () => {
+    try {
+      await update({
+        selectedRecord: {
+          data: { id: 1 },
+          model: { name: 'User' },
+        },
+        mapping: [
+          ...mapping,
+          {
+            key: [
+              {
+                name: 'firstName',
+                kind: 'STRING',
+              },
+            ],
+            value: 'Pete',
+          },
+        ],
+        validationSets: 'default',
+      });
+    } catch (errors) {
+      expect(errors).toHaveLength(1);
+      const error = errors[0];
+      expect(error).toMatchObject(Error('firstName should be John'));
+    }
+  });
+
   test('It throws an error for missing id', async () => {
     try {
       await update({

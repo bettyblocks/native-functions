@@ -49,6 +49,26 @@
       "name": "as",
       "label": "As",
       "info": "The name of the variable you want for the updated record."
+    },
+    {
+      "meta": {
+        "type": "Select",
+        "values": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Empty",
+            "value": "empty"
+          }
+        ],
+        "advanced": true,
+        "default": "default"
+      },
+      "name": "validationSets",
+      "label": "Validation set",
+      "info": "The validations which will be used when creating the record."
     }
   ],
   "yields": "NONE"

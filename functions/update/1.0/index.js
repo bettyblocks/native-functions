@@ -1,4 +1,4 @@
-import { parseAssignedProperties, fetchRecord } from '../../utils';
+import { parseAssignedProperties, fetchRecord, listWrap } from '../../utils';
 
 const update = async ({
   selectedRecord: {
@@ -6,6 +6,7 @@ const update = async ({
     model: { name: modelName },
   },
   mapping,
+  validationSets = null,
 }) => {
   const fragment = await parseToGqlFragment({
     propertyMap: mapping,
@@ -21,14 +22,18 @@ const update = async ({
   const mutationName = `update${modelName}`;
 
   const mutation = `
-    mutation($id: Int!, $input: ${modelName}Input) {
-      ${mutationName}(id: $id, input: $input) {
+    mutation($id: Int!, $input: ${modelName}Input, $validationSets: [String]) {
+      ${mutationName}(id: $id, input: $input, validationSets: $validationSets) {
         id
       }
     }
   `;
 
-  const { errors } = await gql(mutation, { id, input });
+  const { errors } = await gql(mutation, {
+    id,
+    input,
+    validationSets: listWrap(validationSets),
+  });
 
   if (errors) {
     throw errors;

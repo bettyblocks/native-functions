@@ -1,6 +1,10 @@
-import { parseAssignedProperties, fetchRecord } from '../../utils';
+import { parseAssignedProperties, fetchRecord, listWrap } from '../../utils';
 
-const create = async ({ model: { name: modelName }, mapping }) => {
+const create = async ({
+  model: { name: modelName },
+  mapping,
+  validationSets = null,
+}) => {
   const fragment = await parseToGqlFragment({
     propertyMap: mapping,
     modelName,
@@ -15,14 +19,17 @@ const create = async ({ model: { name: modelName }, mapping }) => {
   const mutationName = `create${modelName}`;
 
   const mutation = `
-    mutation($input: ${modelName}Input) {
-      ${mutationName}(input: $input) {
+    mutation($input: ${modelName}Input, $validationSets: [String]) {
+      ${mutationName}(input: $input, validationSets: $validationSets) {
         id
       }
     }
   `;
 
-  const { data, errors } = await gql(mutation, { input });
+  const { data, errors } = await gql(mutation, {
+    input,
+    validationSets: listWrap(validationSets),
+  });
   if (errors) {
     throw errors;
   }
