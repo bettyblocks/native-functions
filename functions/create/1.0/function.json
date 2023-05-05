@@ -49,6 +49,16 @@
       "name": "as",
       "label": "As",
       "info": "The name of the variable you want for the newly created record."
+    },
+    {
+      "meta": {
+        "type": "Boolean",
+        "default": true
+      },
+      "advanced": true,
+      "name": "validates",
+      "label": "Validates",
+      "info": "Apply validations when creating the record."
     }
   ],
   "yields": "NONE"
