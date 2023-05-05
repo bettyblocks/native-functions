@@ -52,23 +52,13 @@
     },
     {
       "meta": {
-        "type": "Select",
-        "values": [
-          {
-            "label": "Default",
-            "value": "default"
-          },
-          {
-            "label": "Empty",
-            "value": "empty"
-          }
-        ],
-        "advanced": true,
-        "default": "default"
+        "type": "Boolean",
+        "default": true
       },
-      "name": "validationSets",
-      "label": "Validation set",
-      "info": "The validations which will be used when creating the record."
+      "advanced": true,
+      "name": "validates",
+      "label": "Validates",
+      "info": "Apply validations when creating the record."
     }
   ],
   "yields": "NONE"

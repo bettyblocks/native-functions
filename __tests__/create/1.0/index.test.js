@@ -229,7 +229,7 @@ describe('Native create', () => {
           value: 'Pete',
         },
       ],
-      validationSets: 'empty',
+      validates: false,
     });
 
     expect(result).toHaveProperty('id');
@@ -256,7 +256,6 @@ describe('Native create', () => {
             value: 'Pete',
           },
         ],
-        validationSets: 'default',
       });
     } catch (errors) {
       expect(errors).toHaveLength(1);

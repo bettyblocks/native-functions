@@ -1,7 +1,7 @@
 import {
   fetchRecord,
-  listWrap,
   parseAssignedProperties,
+  validatesToValidationSets,
 } from '../../functions/utils';
 
 const userFragment = {
@@ -94,13 +94,9 @@ describe('Utility functions', () => {
     });
   });
 
-  test('listWrap', () => {
-    expect(listWrap([])).toStrictEqual([]);
-    expect(listWrap([1])).toStrictEqual([1]);
-    expect(listWrap(1)).toStrictEqual([1]);
-    expect(listWrap(null)).toStrictEqual([]);
-    expect(listWrap()).toStrictEqual([]);
-    expect(listWrap({})).toStrictEqual([{}]);
-    expect(listWrap('test')).toStrictEqual(['test']);
+  test('valdatesToValidationSets', () => {
+    expect(validatesToValidationSets()).toStrictEqual(['default']);
+    expect(validatesToValidationSets(false)).toStrictEqual(['empty']);
+    expect(validatesToValidationSets(true)).toStrictEqual(['default']);
   });
 });

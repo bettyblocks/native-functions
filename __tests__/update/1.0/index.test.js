@@ -253,7 +253,7 @@ describe('Native update', () => {
           value: 'Pete',
         },
       ],
-      validationSets: 'empty',
+      validates: false,
     });
     expect(result).toMatchObject({
       firstName: 'Pete',
@@ -281,7 +281,6 @@ describe('Native update', () => {
             value: 'Pete',
           },
         ],
-        validationSets: 'default',
       });
     } catch (errors) {
       expect(errors).toHaveLength(1);

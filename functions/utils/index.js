@@ -70,13 +70,10 @@ export const fetchRecord = async (modelName, id, fragment = {}) => {
   return record;
 };
 
-export const listWrap = (item) => {
-  if (Array.isArray(item)) {
-    return item;
-  }
-  if (item === undefined || item === null) {
-    return [];
+export const validatesToValidationSets = (validate) => {
+  if (validate === false) {
+    return ['empty'];
   }
 
-  return [item];
+  return ['default'];
 };
