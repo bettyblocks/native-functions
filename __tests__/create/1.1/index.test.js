@@ -1,4 +1,4 @@
-import create from '../../../functions/create/1.0';
+import create from '../../../functions/create/1.1';
 
 const mapping = [
   {
@@ -212,6 +212,56 @@ describe('Native create', () => {
       age: 30,
       tasks: [],
     });
+  });
+
+  test('It creates a record with supplied validationSet', async () => {
+    const { as: result } = await create({
+      model: { name: 'User' },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'firstName',
+              kind: 'STRING',
+            },
+          ],
+          value: 'Pete',
+        },
+      ],
+      validates: false,
+    });
+
+    expect(result).toHaveProperty('id');
+    expect(result).toMatchObject({
+      firstName: 'Pete',
+      lastName: 'Doe',
+      age: 30,
+    });
+  });
+
+  test('It fails creates a record with supplied validationSet', async () => {
+    try {
+      await create({
+        model: { name: 'User' },
+        mapping: [
+          ...mapping,
+          {
+            key: [
+              {
+                name: 'firstName',
+                kind: 'STRING',
+              },
+            ],
+            value: 'Pete',
+          },
+        ],
+      });
+    } catch (errors) {
+      expect(errors).toHaveLength(1);
+      const error = errors[0];
+      expect(error).toMatchObject(Error('firstName should be John'));
+    }
   });
 
   test('It throws an error for invalid input', async () => {
