@@ -1,4 +1,8 @@
-import { fetchRecord, parseAssignedProperties } from '../../functions/utils';
+import {
+  fetchRecord,
+  parseAssignedProperties,
+  validatesToValidationSets,
+} from '../../functions/utils';
 
 const userFragment = {
   name: 'userFields',
@@ -88,5 +92,11 @@ describe('Utility functions', () => {
         age: 30,
       },
     });
+  });
+
+  test('valdatesToValidationSets', () => {
+    expect(validatesToValidationSets()).toStrictEqual(['default']);
+    expect(validatesToValidationSets(false)).toStrictEqual(['empty']);
+    expect(validatesToValidationSets(true)).toStrictEqual(['default']);
   });
 });

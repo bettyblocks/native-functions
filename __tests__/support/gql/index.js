@@ -102,8 +102,8 @@ const schema = buildSchema(`
   }
 
   type Mutation {
-    createUser(input: UserInput): User
-    updateUser(id: Int!, input: UserInput): User
+    createUser(input: UserInput, validationSets: [String]): User
+    updateUser(id: Int!, input: UserInput, validationSets: [String]): User
     deleteUser(id: Int!): User
     generateJwt(authProfileUuid: String!, userId: Int, username: String, password: String): Token
   }
@@ -124,8 +124,14 @@ const root = {
   }) {
     return userDatabase[id];
   },
-  createUser({ input }) {
+  createUser({ input, validationSets }) {
     const id = Math.floor((Math.random() + 1) * 100);
+
+    if (input.firstName === 'Pete') {
+      if (validationSets[0] !== 'empty') {
+        throw new Error('firstName should be John');
+      }
+    }
 
     userDatabase[id] = new User(id, input);
 
@@ -133,7 +139,13 @@ const root = {
       id,
     };
   },
-  updateUser({ id, input }) {
+  updateUser({ id, input, validationSets }) {
+    if (input.firstName === 'Pete') {
+      if (validationSets[0] !== 'empty') {
+        throw new Error('firstName should be John');
+      }
+    }
+
     userDatabase[id].update(input);
   },
   deleteUser({ id }) {
