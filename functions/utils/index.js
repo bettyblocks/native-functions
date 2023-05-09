@@ -69,3 +69,11 @@ export const fetchRecord = async (modelName, id, fragment = {}) => {
 
   return record;
 };
+
+export const validatesToValidationSets = (validate) => {
+  if (validate === false) {
+    return ['empty'];
+  }
+
+  return ['default'];
+};
