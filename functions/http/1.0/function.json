@@ -12,6 +12,7 @@
       "label": "Protocol",
       "meta": {
         "type": "Select",
+        "default": "https",
         "values": [
           {
             "label": "HTTP",
