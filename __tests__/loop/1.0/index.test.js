@@ -1,6 +1,6 @@
 import loop from '../../../functions/loop/1.0';
 
-describe('Native loop', () => {
+describe('Native loop 1.0', () => {
   test('It loops over a collection and execustes child steps', async () => {
     const collection = { data: [{ id: 1 }, { id: 2 }] };
     const childSteps = jest.fn();
