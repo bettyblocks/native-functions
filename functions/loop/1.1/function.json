@@ -15,16 +15,16 @@
           "required": true
         }
       },
-      "name": "data",
-      "label": "Data",
-      "info": "The data you want to loop through."
+      "name": "array",
+      "label": "Array",
+      "info": "The array you want to loop through."
     },
     {
       "meta": {
         "type": "Output",
         "output": {
           "type": "Inherit",
-          "source": "data",
+          "source": "array",
           "toSingleItem": true,
           "scoped": true
         },
