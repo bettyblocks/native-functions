@@ -1,6 +1,6 @@
 {
   "description": "Loops through a given array.",
-  "label": "Array Loop",
+  "label": "Loop",
   "category": "FLOW",
   "icon": {
     "name": "LoopIcon",
