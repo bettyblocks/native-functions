@@ -13,7 +13,7 @@
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
-    "@commitlint/cli": "^13.1.0",
+    "@commitlint/cli": "^17.7.1",
     "@commitlint/config-angular": "^13.1.0",
     "@commitlint/prompt-cli": "^16.2.3",
     "@types/jest": "^27.4.0",
@@ -27,7 +27,6 @@
     "graphql": "^15.5.1",
     "husky": "^7.0.2",
     "jest": "^27.0.6",
-    "number-is-nan": "^3.0.0",
     "prettier": "^2.3.2"
   },
   "repository": {
