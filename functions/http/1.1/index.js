@@ -13,14 +13,13 @@ const parseQueryParameters = (queryParameters) =>
     })
     .join('&');
 
-const parseLiquid = async (body, bodyParameters) =>
+const parseLiquid = (body, bodyParameters) =>
   engine.parseAndRenderSync(
     body,
-    bodyParameters.reduce((parameter, { key, value }) => {
-      // eslint-disable-next-line no-param-reassign
-      parameter[key] = value;
-      return parameter;
-    }, {}),
+    bodyParameters.reduce(
+      (parameter, { key, value }) => ({ ...parameter, [key]: value }),
+      {},
+    ),
   );
 
 const generateUrl = (url, protocol, queryParameters) =>
@@ -33,8 +32,8 @@ const http = async ({
   headers = [],
   protocol,
   queryParameters = [],
-  bodyParameters,
-  urlParameters,
+  bodyParameters = [],
+  urlParameters = [],
 }) => {
   const parsedBody =
     bodyParameters.length > 0 ? await parseLiquid(body, bodyParameters) : body;
