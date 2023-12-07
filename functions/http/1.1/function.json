@@ -13,6 +13,9 @@
       "meta": {
         "type": "Select",
         "default": "https",
+        "validations": {
+          "required": true
+        },
         "values": [
           {
             "label": "HTTP",
@@ -37,7 +40,13 @@
     {
       "info": "Enter the URL of the API that you want to use.",
       "label": "Url",
+      "configuration": {
+        "placeholder": "jsonplaceholder.typicode.com/posts/{{id}}"
+      },
       "meta": {
+        "validations": {
+          "required": true
+        },
         "type": "Text"
       },
       "name": "url"
@@ -46,6 +55,8 @@
       "info": "HTTP defines a set of request methods to indicate the desired action to be performed for the given resource.",
       "label": "Method",
       "meta": {
+        "validations": { "required": true },
+        "default": "get",
         "type": "Select",
         "values": [
           {
@@ -106,6 +117,9 @@
     {
       "meta": {
         "type": "Output",
+        "validations": {
+          "required": true
+        },
         "output": {
           "type": "Text"
         }
