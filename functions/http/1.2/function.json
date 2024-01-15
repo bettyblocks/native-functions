@@ -96,14 +96,6 @@
       "name": "queryParameters"
     },
     {
-      "info": "Map the values that you want to use in your body",
-      "label": "Body Parameters",
-      "meta": {
-        "type": "Map"
-      },
-      "name": "bodyParameters"
-    },
-    {
       "info": "An optional body containing data associated with the request.",
       "label": "Body",
       "configuration": {
@@ -113,6 +105,22 @@
         "type": "MultilineText"
       },
       "name": "body"
+    },
+    {
+      "info": "Map the values that you want to use in your body.",
+      "label": "Body Parameters",
+      "meta": {
+        "type": "Map"
+      },
+      "name": "bodyParameters"
+    },
+    {
+      "info": "The schema model can be utilized to type the output of this step when it is an object or an array of objects.",
+      "meta": {
+        "type": "SchemaModel"
+      },
+      "name": "schemaModel",
+      "label": "Schema Model"
     },
     {
       "name": "as",
@@ -125,13 +133,11 @@
         "output": {
           "anyOf": [
             { "type": "Text" },
-            { "type": "Number" },
-            { "type": "Boolean" },
             { "type": "Object", "schemaModel": "schemaModel" },
             {
               "type": "Array",
               "schemaModel": "schemaModel",
-              "dateType": "Schema"
+              "dataType": "SCHEMA"
             }
           ]
         }
