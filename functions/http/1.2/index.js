@@ -25,9 +25,9 @@ const parseLiquid = (body, bodyParameters) =>
 const generateUrl = (url, protocol, queryParameters) =>
   `${protocol}://${url}${parseQueryParameters(queryParameters)}`;
 
-const isJson = (object) => {
+const isJson = (data) => {
   try {
-    JSON.parse(object);
+    JSON.parse(data);
     return true;
   } catch (e) {
     return false;
