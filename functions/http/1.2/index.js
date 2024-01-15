@@ -25,6 +25,15 @@ const parseLiquid = (body, bodyParameters) =>
 const generateUrl = (url, protocol, queryParameters) =>
   `${protocol}://${url}${parseQueryParameters(queryParameters)}`;
 
+const isJson = (object) => {
+  try {
+    JSON.parse(object);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 const http = async ({
   url,
   method,
@@ -49,9 +58,9 @@ const http = async ({
   };
 
   const response = await fetch(fetchUrl, options);
-  const data = await response.text();
+  const data = response.text();
 
-  return { as: data };
+  return { as: isJson(data) ? JSON.parse(data) : data };
 };
 
 export default http;

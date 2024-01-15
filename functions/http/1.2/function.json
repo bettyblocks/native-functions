@@ -96,14 +96,6 @@
       "name": "queryParameters"
     },
     {
-      "info": "Map the values that you want to use in your body",
-      "label": "Body Parameters",
-      "meta": {
-        "type": "Map"
-      },
-      "name": "bodyParameters"
-    },
-    {
       "info": "An optional body containing data associated with the request.",
       "label": "Body",
       "configuration": {
@@ -113,6 +105,22 @@
         "type": "MultilineText"
       },
       "name": "body"
+    },
+    {
+      "info": "Map the values that you want to use in your body",
+      "label": "Body Parameters",
+      "meta": {
+        "type": "Map"
+      },
+      "name": "bodyParameters"
+    },
+    {
+      "info": "The output format of the response. This can be used to select the properties of an object or array in a later step",
+      "meta": {
+        "type": "SchemaModel"
+      },
+      "name": "schemaModel",
+      "label": "Schema Model"
     },
     {
       "name": "as",
