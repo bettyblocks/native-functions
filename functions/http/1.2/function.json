@@ -107,7 +107,7 @@
       "name": "body"
     },
     {
-      "info": "Map the values that you want to use in your body",
+      "info": "Map the values that you want to use in your body.",
       "label": "Body Parameters",
       "meta": {
         "type": "Map"
@@ -115,7 +115,7 @@
       "name": "bodyParameters"
     },
     {
-      "info": "The output format of the response. This can be used to select the properties of an object or array in a later step",
+      "info": "The schema model can be utilized to type the output of this step when it is an object or an array of objects.",
       "meta": {
         "type": "SchemaModel"
       },
@@ -133,13 +133,11 @@
         "output": {
           "anyOf": [
             { "type": "Text" },
-            { "type": "Number" },
-            { "type": "Boolean" },
             { "type": "Object", "schemaModel": "schemaModel" },
             {
               "type": "Array",
               "schemaModel": "schemaModel",
-              "dataType": "Schema"
+              "dataType": "SCHEMA"
             }
           ]
         }
