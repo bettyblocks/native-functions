@@ -10,7 +10,7 @@
     {
       "meta": {
         "type": "Value",
-        "allowedKinds": ["NUMBER", "BOOLEAN", "STRING", "RECORD"],
+        "allowedKinds": ["INTEGER", "BOOLEAN", "STRING", "RECORD"],
         "validations": {
           "required": true
         }
