@@ -123,6 +123,7 @@
       "label": "Schema Model"
     },
     {
+      "info": "The name of the variable you want for the status code of the response.",
       "name": "responseCode",
       "label": "Response code as",
       "meta": {
