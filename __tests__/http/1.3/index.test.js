@@ -2,7 +2,7 @@ import http from '../../../functions/http/1.3';
 
 describe('Native http', () => {
   test('It makes a succesfull http call.', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
 
     const request = {
       url: 'http://example.com',
@@ -22,7 +22,7 @@ describe('Native http', () => {
   });
 
   test('It will parse the Url parameters correctly', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
 
     const request = {
       protocol: 'https',
@@ -44,7 +44,7 @@ describe('Native http', () => {
   });
 
   test('It will parse the body parameters correctly', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
 
     const request = {
       protocol: 'https',
