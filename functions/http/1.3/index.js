@@ -1,4 +1,4 @@
-import Liquid from './liquid.min';
+import Liquid from '../../utils/liquid.min';
 
 const engine = new Liquid();
 

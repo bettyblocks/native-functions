@@ -1,9 +1,12 @@
 import Liquid from '../../utils/liquid.min';
 
-const engine = new Liquid();
+let engine = null;
+
+// eslint-disable-next-line no-return-assign
+const makeEngine = () => engine || (engine = new Liquid());
 
 const parseHeaders = (headers) =>
-  headers.reduce((acc, { key, value }) => ({ ...acc, [key]: value }), {});
+  Object.fromEntries(headers.map(({ key, value }) => [key, value]));
 
 const parseQueryParameters = (queryParameters) =>
   queryParameters
@@ -13,24 +16,31 @@ const parseQueryParameters = (queryParameters) =>
     })
     .join('&');
 
-const parseLiquid = (body, bodyParameters) =>
-  engine.parseAndRenderSync(
-    body,
-    bodyParameters.reduce(
-      (parameter, { key, value }) => ({ ...parameter, [key]: value }),
-      {},
-    ),
+const parseLiquid = (body, bodyParameters) => {
+  const variables = Object.fromEntries(
+    bodyParameters.map(({ key, value }) => [key, value]),
   );
 
-const generateUrl = (url, protocol, queryParameters) =>
-  `${protocol}://${url}${parseQueryParameters(queryParameters)}`;
+  return makeEngine().parseAndRender(body, variables);
+};
 
-const isJson = (data) => {
+const generateUrl = (url, protocol, queryParameters) => {
+  let trimmedUrl = url;
+  if (trimmedUrl.startsWith('http://')) {
+    [, trimmedUrl] = trimmedUrl.split('http://');
+  }
+  if (trimmedUrl.startsWith('https://')) {
+    [, trimmedUrl] = trimmedUrl.split('https://');
+  }
+
+  return `${protocol}://${trimmedUrl}${parseQueryParameters(queryParameters)}`;
+};
+
+const optionallyParseJson = (data) => {
   try {
-    JSON.parse(data);
-    return true;
+    return JSON.parse(data);
   } catch (e) {
-    return false;
+    return data;
   }
 };
 
@@ -58,9 +68,10 @@ const http = async ({
   };
 
   const response = await fetch(fetchUrl, options);
+  const responseCode = response.status;
   const data = response.text();
 
-  return { as: isJson(data) ? JSON.parse(data) : data };
+  return { as: optionallyParseJson(data), responseCode };
 };
 
 export default http;

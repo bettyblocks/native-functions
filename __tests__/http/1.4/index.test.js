@@ -1,4 +1,4 @@
-import http from '../../../functions/http/1.3';
+import http from '../../../functions/http/1.4';
 
 describe('Native http', () => {
   test('It makes a succesfull http call.', async () => {
@@ -12,6 +12,26 @@ describe('Native http', () => {
         { key: 'Content-Type', value: 'application/json; charset=UTF-8' },
       ],
       protocol: 'http',
+      queryParameters: [{ key: 'name', value: 'foo' }],
+    };
+
+    const { as, responseCode } = await http(request);
+
+    expect(as).toBe('return text');
+    expect(responseCode).toBe(200);
+  });
+
+  test('It makes a succesfull http call trims protocol off', async () => {
+    expect.assertions(2);
+
+    const request = {
+      url: 'https://example.com',
+      method: 'get',
+      body: '',
+      headers: [
+        { key: 'Content-Type', value: 'application/json; charset=UTF-8' },
+      ],
+      protocol: 'https',
       queryParameters: [{ key: 'name', value: 'foo' }],
     };
 
