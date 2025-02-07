@@ -24,12 +24,24 @@
             "value": "post"
           },
           {
+            "label": "PUT",
+            "value": "put"
+          },
+          {
+            "label": "PATCH",
+            "value": "patch"
+          },
+          {
             "label": "DELETE",
             "value": "delete"
           },
           {
-            "label": "PUT",
-            "value": "put"
+            "label": "HEAD",
+            "value": "head"
+          },
+          {
+            "label": "OPTIONS",
+            "value": "options"
           }
         ]
       },
