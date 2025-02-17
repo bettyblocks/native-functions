@@ -5,7 +5,7 @@ describe('Native http', () => {
     expect.assertions(1);
 
     const request = {
-      url: 'http://example.com',
+      url: 'example.com',
       method: 'get',
       body: '',
       headers: [
@@ -23,7 +23,7 @@ describe('Native http', () => {
     expect.assertions(1);
 
     const request = {
-      url: 'http://error.com',
+      url: 'error.com',
       method: 'get',
       body: '',
       headers: [
