@@ -1,8 +1,8 @@
-import http from '../../../functions/http/1.1';
+import http from '../../../functions/http/1.4';
 
 describe('Native http', () => {
   test('It makes a succesfull http call.', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
 
     const request = {
       url: 'example.com',
@@ -15,13 +15,34 @@ describe('Native http', () => {
       queryParameters: [{ key: 'name', value: 'foo' }],
     };
 
-    const { as } = await http(request);
+    const { as, responseCode } = await http(request);
 
     expect(as).toBe('return text');
+    expect(responseCode).toBe(200);
+  });
+
+  test('It makes a succesfull http call trims protocol off', async () => {
+    expect.assertions(2);
+
+    const request = {
+      url: 'https://example.com',
+      method: 'get',
+      body: '',
+      headers: [
+        { key: 'Content-Type', value: 'application/json; charset=UTF-8' },
+      ],
+      protocol: 'https',
+      queryParameters: [{ key: 'name', value: 'foo' }],
+    };
+
+    const { as, responseCode } = await http(request);
+
+    expect(as).toBe('return text');
+    expect(responseCode).toBe(200);
   });
 
   test('It will parse the Url parameters correctly', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
 
     const request = {
       protocol: 'https',
@@ -36,13 +57,14 @@ describe('Native http', () => {
       bodyParameters: [],
     };
 
-    const { as } = await http(request);
+    const { as, responseCode } = await http(request);
 
     expect(as).toBe('return url');
+    expect(responseCode).toBe(200);
   });
 
   test('It will parse the body parameters correctly', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
 
     const request = {
       protocol: 'https',
@@ -56,9 +78,10 @@ describe('Native http', () => {
       bodyParameters: [{ key: 'name', value: 'foo' }],
     };
 
-    const { as } = await http(request);
+    const { as, responseCode } = await http(request);
 
     expect(as).toBe('Hello foo');
+    expect(responseCode).toBe(200);
   });
 
   test('It will crash when fetch throws errors.', () => {
