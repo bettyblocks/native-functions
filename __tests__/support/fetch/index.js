@@ -17,7 +17,7 @@ const successResponse = (url) => ({
 
 const fetch = async (url, _context, _options) => {
   switch (url) {
-    case 'http://http://error.com?name=foo':
+    case 'http://error.com?name=foo':
       throw new Error('Something went wrong.');
     case 'https://test.test/101':
       return {
@@ -31,6 +31,9 @@ const fetch = async (url, _context, _options) => {
         text: () => _context.body,
       };
     default:
+      if (url.startsWith('http://http') || url.startsWith('https://http')) {
+        throw new Error('invalid url.');
+      }
       return successResponse(url);
   }
 };
