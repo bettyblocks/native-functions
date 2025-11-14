@@ -10,68 +10,19 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      npm_token: ${{ secrets.NPM_TOKEN }}
     steps:
       - run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: branch
-      - run: npm config set '//registry.npmjs.org/:_authToken' '${{ secrets.NPM_TOKEN }}'
-      - run: npm install -g @betty-blocks/cli @betty-blocks/jaws form-data fs-extra shelljs
-      - uses: actions/checkout@v2
-      - uses: actions/github-script@v6
+      - uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          script: |
-            const global = '/usr/local/lib/node_modules';
-            const cli = `${global}/@betty-blocks/cli/build`;
+          bun-version: latest
 
-            const Jaws = require(`${global}/@betty-blocks/jaws`);
-            const FormData = require(`${global}/form-data`);
-            const fs = require(`${global}/fs-extra`);
-            const path = require('path');
-            const shell = require(`${global}/shelljs`);
+      - name: Install npm dependencies
+        run: bun install --frozen-lockfile
 
-            const run = (cmd) => shell.exec(cmd, {silent: true}).stdout.trim();
-
-            const URL = '${{ secrets.API_URL }}';
-            const CONFIG = JSON.parse('${{ secrets.JAWS_SECRETS }}');
-            const jaws = Jaws.default.getInstance(CONFIG);
-            const zones = CONFIG.services;
-
-            const {
-              functionDefinitions,
-              stringifyDefinitions,
-              zipFunctionDefinitions
-            } = require(
-              `${global}/@betty-blocks/cli/build/functions/functionDefinitions.js`
-            );
-
-            const functionsDir = path.join(run('pwd'), 'functions');
-            const functions = functionDefinitions(functionsDir);
-            const functionsJson = stringifyDefinitions(functions);
-
-            const appFile = zipFunctionDefinitions(functionsDir);
-            const nativeFile = appFile.replace('app', 'native');
-            run(`mv ${appFile} ${nativeFile}`);
-
-            const currentBranch = '${{ steps.branch.outputs.branch }}';
-
-            Object.keys(zones).forEach(zone => {
-              const url = URL.replace('{ZONE}', zone);
-              const jwt = jaws.sign(zone, {application_id: 'native'}).jwt;
-              const zoneBranch = zone.match(/(edge|acceptance)/) ? zone : 'master';
-
-              if (currentBranch === zoneBranch) {
-                const formData = new FormData();
-                formData.append('functions', functionsJson);
-                formData.append('options', JSON.stringify({compile: false}));
-                formData.append('file', fs.createReadStream(nativeFile));
-
-                fetch(url, {
-                  method: 'POST',
-                  body: formData,
-                  headers: {
-                    Authorization: `Bearer ${jwt}`,
-                  },
-                }).then(response => {
-                  console.log(`[${zone.slice(0, 3)}] ${response.status} - ${response.statusText}`);
-                });
-              }
-            });
+      - name: Publish to Betty Blocks
+        run: bun run publish.ts ${{ secrets.API_URL }} ${{ secrets.JAWS_SECRETS }} ${{ steps.branch.outputs.branch }}

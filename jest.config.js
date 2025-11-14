@@ -1,7 +1,11 @@
 module.exports = {
   coverageDirectory: 'coverage',
   collectCoverage: true,
-  coveragePathIgnorePatterns: ['/node_modules/', 'liquid.min.js'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    'liquid.min.js',
+    'jsonpath.min.js',
+  ],
   coverageProvider: 'v8',
   setupFiles: ['./__tests__/support/setup/index.js'],
   testEnvironment: 'node',
