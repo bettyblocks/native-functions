@@ -24,7 +24,7 @@ if (!CURRENT_BRANCH) {
 }
 
 const URL = API_URL;
-const CONFIG = JSON.parse(`${JAWS_SECRETS}`);
+const CONFIG = JSON.parse(JAWS_SECRETS);
 const currentBranch = CURRENT_BRANCH;
 
 const jaws = Jaws.getInstance(CONFIG);
