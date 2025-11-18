@@ -30,7 +30,8 @@ const currentBranch = CURRENT_BRANCH;
 const jaws = Jaws.getInstance(CONFIG);
 const zones = CONFIG.services;
 
-const functionsDir = path.join(os.homedir(), 'functions');
+const workingDir = process.cwd();
+const functionsDir = path.join(workingDir, 'functions');
 const functions = await functionDefinitions(functionsDir);
 const functionsJson = stringifyDefinitions(functions);
 
