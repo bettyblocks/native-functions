@@ -26,6 +26,7 @@
     "fetch": "readonly",
     "smtp": "readonly",
     "storeFile": "readonly",
-    "parseToGqlFragment": "readonly"
+    "parseToGqlFragment": "readonly",
+    "runAction": "readonly"
   }
 }
