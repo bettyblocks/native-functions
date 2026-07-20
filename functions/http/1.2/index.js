@@ -58,7 +58,7 @@ const http = async ({
   };
 
   const response = await fetch(fetchUrl, options);
-  const data = response.text();
+  const data = await response.text();
 
   return { as: isJson(data) ? JSON.parse(data) : data };
 };
