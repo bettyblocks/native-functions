@@ -69,7 +69,7 @@ const http = async ({
 
   const response = await fetch(fetchUrl, options);
   const responseCode = response.status;
-  const data = response.text();
+  const data = await response.text();
 
   return { as: optionallyParseJson(data), responseCode };
 };
